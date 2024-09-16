@@ -5,6 +5,9 @@ on:
     tags:
       - '*'  # Triggers the workflow on any new tag
 
+permissions:
+  write : true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -41,4 +44,5 @@ jobs:
           asset_path: card.pdf  # Path to the PDF to upload
           asset_name: card.pdf  # Name for the uploaded asset
           asset_content_type: application/pdf
-          token: ${{ secrets.GITHUB_TOKEN }}  # Use the GITHUB_TOKEN secret
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the GITHUB_TOKEN secret
