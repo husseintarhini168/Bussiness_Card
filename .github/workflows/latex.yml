@@ -3,7 +3,7 @@ name: Compile LaTeX
 on:
   push:
     tags:
-      - '*' 
+      - '*'  # Triggers the workflow on any new tag
 
 jobs:
   build:
@@ -17,12 +17,13 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           root_file: card.tex
+          compiler: xelatex  # Use XeTeX for compilation
 
       - name: Upload compiled PDF
         uses: actions/upload-artifact@v3
         with:
           name: compiled-pdf
-          path: card.pdf 
+          path: card.pdf  # Make sure this matches the output PDF file
 
       - name: Create GitHub Release
         id: create_release
@@ -30,7 +31,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }} 
+          tag_name: ${{ github.ref }}  
           release_name: Release ${{ github.ref }}  
           draft: false
           prerelease: false
