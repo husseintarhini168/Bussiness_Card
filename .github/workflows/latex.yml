@@ -6,7 +6,7 @@ on:
       - '*'  # Triggers the workflow on any new tag
 
 permissions:
-  write : true
+  contents : write
 
 jobs:
   build:
