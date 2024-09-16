@@ -28,9 +28,8 @@ jobs:
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}  # Use a PAT instead of GITHUB_TOKEN
         with:
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}  # Use the PAT secret
           tag_name: ${{ github.ref }}  # The tag that triggered the workflow
           release_name: Release ${{ github.ref }}  # Name for the release
           draft: false
@@ -38,10 +37,9 @@ jobs:
 
       - name: Upload PDF to Release
         uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}  # Use a PAT instead of GITHUB_TOKEN
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: card.pdf  # Path to the PDF to upload
           asset_name: card.pdf  # Name for the uploaded asset
           asset_content_type: application/pdf
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}  # Use the PAT secret
