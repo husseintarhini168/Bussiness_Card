@@ -1,0 +1,25 @@
+name: Compile LaTeX
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up LaTeX environment
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: card.tex
+
+      - name: Upload compiled PDF
+        uses: actions/upload-artifact@v3
+        with:
+          name: compiled-pdf
+          path: logo.pdf
